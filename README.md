@@ -1,4 +1,4 @@
-# ERC20 Token Swap Demo
+# ERC20 Token Swap
 
 This project demonstrates a hardhat use case to swap ERC20 tokens in a whale address using Uniswap protocol
 

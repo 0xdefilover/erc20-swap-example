@@ -9,7 +9,7 @@ This project demonstrates a hardhat use case to swap ERC20 tokens in a whale add
 
 ```
 # Add Infura provider key
-INFURA_KEY=
+INFURA_API_KEY=
 
 # An owner address's private key to deploy the contract on the testnets
 PRIVATE_KEY=
@@ -19,11 +19,11 @@ ETHERSCAN_KEY=
 
 ```
 
-## How to compile
+## Compile
 npm run compile
 
-## How to test
+## Test
 npm run test
 
-## How to deploy on the ropsten testnet
+## Deploy on the ropsten testnet
 npm run deploy

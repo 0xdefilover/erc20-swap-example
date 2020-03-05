@@ -26,7 +26,7 @@ const config: HardhatUserConfig = {
       chainId: chainIds.hardhat,
       forking: {
         url: `https://mainnet.infura.io/v3/${INFURA_API_KEY}`,
-        // url: `https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_KEY}` 
+        // url: `https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_KEY}`
       }
     },
     kovan: {
@@ -43,7 +43,7 @@ const config: HardhatUserConfig = {
   solidity: {
     compilers: [
       { 
-        version: "0.8.3", 
+        version: "0.6.12", 
         settings: {} 
       }
     ],

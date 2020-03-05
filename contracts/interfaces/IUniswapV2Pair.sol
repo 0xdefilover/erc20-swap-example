@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.3;
+pragma solidity ^0.6.12;
 
 interface IUniswapV2Pair {
     function token0() external view returns (address);

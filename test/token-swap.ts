@@ -113,13 +113,13 @@ describe("Token Swap", () => {
       .connect(whaleSigner)
       .allowance(whale, tokenSwap.address);
       
-    console.log('allowance', allowBalance);
+    console.log('allowance', allowBalance.toString());
 
     await tokenSwap
       .connect(whaleSigner)
       .swap(tokenIn.address, tokenOut.address, AMOUNT_IN, AMOUNT_OUT_MIN, TO);
 
     const balance = await tokenOut.balanceOf(TO);
-    console.log(balance);
+    console.log(balance.toString());
   });
 });

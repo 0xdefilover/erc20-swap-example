@@ -1,6 +1,6 @@
 # ERC20 Token Swap
 
-This project demonstrates a hardhat use case to swap ERC20 tokens using the Uniswap V2 protocol
+This project demonstrates a hardhat use case to swap ERC20 tokens using the Uniswap protocol
 
 ## Setup
 

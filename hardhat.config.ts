@@ -1,7 +1,6 @@
 import { HardhatUserConfig } from "hardhat/types";
 import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
-import "hardhat-dependency-compiler";
 import * as dotenv from 'dotenv';
 dotenv.config();
 
@@ -24,15 +23,11 @@ const config: HardhatUserConfig = {
   networks: {
     hardhat: {
       chainId: chainIds.hardhat,
-      forking: {
+      forking: { // mainnet fork
         url: `https://mainnet.infura.io/v3/${INFURA_API_KEY}`,
+        blockNumber: 13718340
         // url: `https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_KEY}`
       }
-    },
-    kovan: {
-      url: `https://kovan.infura.io/v3/${INFURA_API_KEY}`,
-      chainId: chainIds.kovan,
-      accounts: [`0x${PRIVATE_KEY}`]
     },
     ropsten: {
       url: `https://ropsten.infura.io/v3/${INFURA_API_KEY}`,
@@ -50,11 +45,6 @@ const config: HardhatUserConfig = {
   },
   mocha: {
     timeout: 80000
-  },
-  dependencyCompiler: {
-    paths: [
-      '@openzeppelin/contracts/token/ERC20/IERC20.sol',
-    ],
   }
 };
 

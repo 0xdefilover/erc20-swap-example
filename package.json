@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "compile": "npx hardhat compile",
-    "test": "npx hardhat test",
-    "deploy": "npx hardhat run --network ropsten scripts/deploy.ts"
+    "compile": "hardhat compile",
+    "test": "npm run compile && hardhat test",
+    "deploy": "hardhat run --network ropsten scripts/deploy.ts"
   },
   "author": "",
   "license": "MIT",

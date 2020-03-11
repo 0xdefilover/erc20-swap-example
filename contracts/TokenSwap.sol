@@ -45,12 +45,40 @@ contract TokenSwap {
         );
     }
 
+    function getAmountOutMin(
+        address _tokenIn,
+        address _tokenOut,
+        uint _amountIn
+    ) external view returns (uint) {
+        address[] memory path;
+        if (_tokenIn == WETH || _tokenOut == WETH) {
+            path = new address[](2);
+            path[0] = _tokenIn;
+            path[1] = _tokenOut;
+        } else {
+            path = new address[](3);
+            path[0] = _tokenIn;
+            path[1] = WETH;
+            path[2] = _tokenOut;
+        }
+
+        // same length as path
+        uint[] memory amountOutMins = IUniswapV2Router(UNISWAP_V2_ROUTER)
+            .getAmountsOut(
+                _amountIn,
+                path
+            );
+
+        return amountOutMins[path.length - 1];
+    }
+
     function getUniswapV2PairAddress(address token0, address token1)
-        public
+        external
         view
         returns(address)
     {
-        address pair = IUniswapV2Factory(UNISWAP_V2_FACTORY).getPair(token0, token1);
+        address pair = IUniswapV2Factory(UNISWAP_V2_FACTORY)
+            .getPair(token0, token1);
         return pair;
     }
 }

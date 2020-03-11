@@ -77,7 +77,6 @@ describe("Token Swap", () => {
     const pundix = "0x0FD10b9899882a6f2fcb5c371E17e70FdEe00C38";
     const dai = "0x6b175474e89094c44da98b954eedeac495271d0f";
 
-    // const AMOUNT_IN = ethers.utils.parseUnits("10", 18);
     const AMOUNT_IN = ether(10);
     const AMOUNT_OUT_MIN = 1;
     const TOKEN_IN = pundix;
@@ -86,40 +85,29 @@ describe("Token Swap", () => {
     const tokenIn = await erc20.attach(TOKEN_IN);
     const tokenOut = await erc20.attach(TOKEN_OUT);
 
-    // const pairAddress = await tokenSwap.getUniswapV2PairAddress(TOKEN_IN, TOKEN_OUT);
-    // console.log(pairAddress);
-    //   const tokenWhale = await erc20.attach(whale);
-
-    // await hre.network.provider.request({
-    //   method: "hardhat_impersonateAccount",
-    //   params: [whale],
-    // });
-
     await unlockAccount(whale);
     const whaleSigner = await ethers.provider.getSigner(whale);
 
-    // console.log(await whaleSigner.getBalance());
     await signers[0].sendTransaction({
       to: whale,
       value: ethers.utils.parseEther("100"),
     });
 
-    // await ethers.provider.send("hardhat_setBalance", [whale, ethers.utils.parseEther("10")]);
     await tokenIn
       .connect(whaleSigner)
       .approve(tokenSwap.address, ethers.utils.parseUnits("100", 18));
-      
-    const allowBalance = await tokenIn
-      .connect(whaleSigner)
-      .allowance(whale, tokenSwap.address);
-      
-    console.log('allowance', allowBalance.toString());
 
+    const amountOutMin = await tokenSwap
+      .connect(whaleSigner)
+      .getAmountOutMin(tokenIn.address, tokenOut.address, AMOUNT_IN);
+    
+    console.log('amountOutMin', amountOutMin.toString());
+    
     await tokenSwap
       .connect(whaleSigner)
       .swap(tokenIn.address, tokenOut.address, AMOUNT_IN, AMOUNT_OUT_MIN, TO);
 
     const balance = await tokenOut.balanceOf(TO);
-    console.log(balance.toString());
+    console.log('swapped amount', balance.toString());
   });
 });

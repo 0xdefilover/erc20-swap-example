@@ -73,9 +73,7 @@ describe("Token Swap", () => {
     const weth = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2";
     const whale = "0x3f5CE5FBFe3E9af3971dD833D26bA9b5C936f0bE";
 
-    const cocos = "0x0C6f5F7D555E7518f6841a79436BD2b1Eef03381";
     const pundix = "0x0FD10b9899882a6f2fcb5c371E17e70FdEe00C38";
-    const dai = "0x6b175474e89094c44da98b954eedeac495271d0f";
 
     const AMOUNT_IN = ether(10);
     const AMOUNT_OUT_MIN = 1;
@@ -102,7 +100,7 @@ describe("Token Swap", () => {
       .getAmountOutMin(tokenIn.address, tokenOut.address, AMOUNT_IN);
     
     console.log('amountOutMin', amountOutMin.toString());
-    
+
     await tokenSwap
       .connect(whaleSigner)
       .swap(tokenIn.address, tokenOut.address, AMOUNT_IN, AMOUNT_OUT_MIN, TO);

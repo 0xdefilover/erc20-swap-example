@@ -15,7 +15,6 @@ const chainIds = {
 };
 
 const INFURA_API_KEY = process.env.INFURA_API_KEY || "";
-const ALCHEMY_KEY = process.env.ALCHEMY_KEY || "";
 const PRIVATE_KEY = process.env.PRIVATE_KEY || "";
 
 const config: HardhatUserConfig = {
@@ -26,7 +25,6 @@ const config: HardhatUserConfig = {
       forking: { // mainnet fork
         url: `https://mainnet.infura.io/v3/${INFURA_API_KEY}`,
         blockNumber: 13718340
-        // url: `https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_KEY}`
       }
     },
     ropsten: {

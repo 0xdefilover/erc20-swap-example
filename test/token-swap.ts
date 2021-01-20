@@ -3,15 +3,9 @@ import hre from "hardhat";
 import chai from "chai";
 import { solidity } from "ethereum-waffle";
 import { TokenSwap } from "../typechain/TokenSwap";
-import { BigNumber } from "@ethersproject/bignumber";
 
 chai.use(solidity);
 const { expect } = chai;
-
-export const ether = (amount: number | string): BigNumber => {
-  const weiString = ethers.utils.parseEther(amount.toString());
-  return BigNumber.from(weiString);
-};
 
 export const unlockAccount = async (address: string) => {
   await hre.network.provider.send("hardhat_impersonateAccount", [address]);
@@ -34,7 +28,7 @@ describe("Token Swap", () => {
 
     await signers[0].sendTransaction({
       to: cocosOwner,
-      value: ether(10),
+      value: ethers.utils.parseEther("10"),
     });
     await unlockAccount(cocosOwner);
 
@@ -60,8 +54,8 @@ describe("Token Swap", () => {
       .addWhiteAccount("0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D");
 
     await cocosToken
-    .connect(cocosOwnerSigner)
-    .addWhiteAccount(signers[0].address);
+      .connect(cocosOwnerSigner)
+      .addWhiteAccount(signers[0].address);
 
     erc20 = await ethers.getContractAt(
       "@openzeppelin/contracts/token/ERC20/IERC20.sol:IERC20",
@@ -75,13 +69,12 @@ describe("Token Swap", () => {
 
     const pundix = "0x0FD10b9899882a6f2fcb5c371E17e70FdEe00C38";
 
-    const AMOUNT_IN = ether(10);
+    const AMOUNT_IN = ethers.utils.parseEther("10");
     const AMOUNT_OUT_MIN = 1;
-    const TOKEN_IN = pundix;
-    const TOKEN_OUT = weth;
+    
     const TO = signers[0].address;
-    const tokenIn = await erc20.attach(TOKEN_IN);
-    const tokenOut = await erc20.attach(TOKEN_OUT);
+    const tokenIn = await erc20.attach(pundix);
+    const tokenOut = await erc20.attach(weth);
 
     await unlockAccount(whale);
     const whaleSigner = await ethers.provider.getSigner(whale);
